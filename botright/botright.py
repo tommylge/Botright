@@ -116,7 +116,7 @@ class Botright(AsyncObject):
                       '--hide-scrollbars', '--disable-renderer-backgrounding', '--font-render-hinting=none', '--disable-logging', '--enable-surface-synchronization',
                       '--run-all-compositor-stages-before-draw', '--disable-threaded-animation', '--disable-threaded-scrolling', '--disable-checker-imaging',
                       '--disable-new-content-rendering-timeout', '--disable-image-animation-resync', '--disable-partial-raster', '--blink-settings=primaryHoverType=2,availableHoverTypes=2,'
-                      'primaryPointerType=4,availablePointerTypes=4', '--disable-layer-tree-host-memory-pressure']
+                      'primaryPointerType=4,availablePointerTypes=4', '--disable-layer-tree-host-memory-pressure', '--no-sandbox']
         # fmt: on
 
         # Collecting items that can be stopped
