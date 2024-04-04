@@ -7,12 +7,13 @@ from tempfile import TemporaryDirectory, gettempdir
 from typing import Any, Dict, List, Optional
 
 import browsers
-import hcaptcha_challenger as solver
 import loguru
 from async_class import AsyncObject
 from chrome_fingerprints import AsyncFingerprintGenerator
 from playwright.async_api import APIResponse, Playwright, async_playwright
-from undetected_playwright.async_api import async_playwright as undetected_async_playwright
+from undetected_playwright.async_api import (
+    async_playwright as undetected_async_playwright,
+)
 
 from botright.playwright_mock import browser
 
@@ -77,8 +78,6 @@ class Botright(AsyncObject):
             use_undetected_playwright (bool, optional): Whether to use undetected_playwright . EXPERIMENTAL (TEMP). Defaults to False.
         """
 
-        # Init local-side of the ModelHub
-        solver.install(upgrade=True)
         # Starting Playwright
         if use_undetected_playwright:
             # (TODO: TEMP)
@@ -131,7 +130,9 @@ class Botright(AsyncObject):
 
         self.fingerprint_generator = AsyncFingerprintGenerator()
 
-    async def new_browser(self, proxy: Optional[str] = None, **launch_arguments) -> BrowserContext:
+    async def new_browser(
+        self, proxy: Optional[str] = None, **launch_arguments
+    ) -> BrowserContext:
         """
         Create a new Botright browser instance with specified configurations.
 
@@ -149,11 +150,15 @@ class Botright(AsyncObject):
 
         # Launching Main Browser
         if self.mask_fingerprint:
-            flags = self.flags + [f"--user-agent={_faker.fingerprint.navigator.user_agent}"]
+            flags = self.flags + [
+                f"--user-agent={_faker.fingerprint.navigator.user_agent}"
+            ]
         else:
             flags = self.flags
 
-        _browser = await browser.new_browser(self, _proxy, _faker, flags, **launch_arguments)
+        _browser = await browser.new_browser(
+            self, _proxy, _faker, flags, **launch_arguments
+        )
         _browser.proxy = _proxy
         _browser.faker = _faker
         _browser.user_action_layer = self.user_action_layer
@@ -202,7 +207,9 @@ class Botright(AsyncObject):
         # Ungoogled Chromium preferred (most stealthy)
         if chromium := browsers.get("chromium"):
             return chromium
-        print("\033[1;33;48m[WARNING] Ungoogled Chromium not found. Recommended for Canvas Manipulation. Download at https://ungoogled-software.github.io/ungoogled-chromium-binaries/ \033[0m")
+        print(
+            "\033[1;33;48m[WARNING] Ungoogled Chromium not found. Recommended for Canvas Manipulation. Download at https://ungoogled-software.github.io/ungoogled-chromium-binaries/ \033[0m"
+        )
 
         # Chrome preferred (much stealthier)
         if chrome := browsers.get("chrome"):
@@ -221,6 +228,8 @@ class Botright(AsyncObject):
 
         for temp_dir in os.listdir(temp_path):
             # Check if the item is a directory and starts with 'botright-'
-            if os.path.isdir(os.path.join(temp_path, temp_dir)) and temp_dir.startswith("botright-"):
+            if os.path.isdir(os.path.join(temp_path, temp_dir)) and temp_dir.startswith(
+                "botright-"
+            ):
                 # If it matches, delete the folder and its contents
                 shutil.rmtree(os.path.join(temp_path, temp_dir))
