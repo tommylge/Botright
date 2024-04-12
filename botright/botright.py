@@ -7,7 +7,6 @@ from tempfile import TemporaryDirectory, gettempdir
 from typing import Any, Dict, List, Optional
 
 import browsers
-import loguru
 from async_class import AsyncObject
 from chrome_fingerprints import AsyncFingerprintGenerator
 from playwright.async_api import APIResponse, Playwright, async_playwright
@@ -22,7 +21,6 @@ from .playwright_mock import BrowserContext
 
 logging.getLogger("websockets").setLevel(logging.WARNING)
 logging.getLogger("httpx").setLevel(logging.WARNING)
-loguru.logger.disable("hcaptcha_challenger")
 
 
 class Botright(AsyncObject):

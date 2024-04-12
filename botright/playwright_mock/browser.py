@@ -123,7 +123,7 @@ async def new_browser(
         _browser = await botright.playwright.chromium.launch_persistent_context(
             user_data_dir=temp_dir_path,
             headless=botright.headless,
-            executable_path="/ms-playwright",
+            executable_path=botright.browser["path"],
             args=flags,
             chromium_sandbox=True,
             **parsed_launch_arguments,
@@ -132,7 +132,7 @@ async def new_browser(
         _browser = await botright.playwright.chromium.launch_persistent_context(
             user_data_dir=temp_dir_path,
             headless=botright.headless,
-            executable_path="/ms-playwright",
+            executable_path=botright.browser["path"],
             args=flags,
             chromium_sandbox=True,
             **parsed_launch_arguments,

@@ -1,4 +1,5 @@
-# Botright v0.5.1
+# Lightweight version of Botright v0.5.1
+
 ![Tests & Linting](https://github.com/Vinyzu/botright/actions/workflows/ci.yml/badge.svg)
 [![](https://img.shields.io/pypi/v/botright.svg?color=1182C3)](https://pypi.org/project/botright/)
 [![Downloads](https://static.pepy.tech/badge/botright)](https://pepy.tech/project/botright)
@@ -15,7 +16,8 @@ playwright install
 ## Usage
 
 ### Botright is currently only available in async mode.
-### It is fully plugable with your existing playwright code. You only have to change your browser initialization!
+
+### It is fully plugable with your existing playwright code. You only have to change your browser initialization
 
 ```py
 import asyncio
